@@ -11,7 +11,12 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 // Enable CORS
-app.use(cors());
+// Allow only the frontend domain
+app.use(cors({
+	origin: 'https://hogwartsseats.netlify.app',  // Replace with your frontend URL
+	methods: ['GET', 'POST'],
+	allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
 // Define routes
 app.use("/api/messages", messageRoutes);
